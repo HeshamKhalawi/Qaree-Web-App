@@ -1,1 +1,23 @@
-<p>login works!</p>
+<div class="flex flex-col justify-center items-center pb-[20rem] bg-[#333333] min-h-screen">
+    <div class="w-[430px]">
+        <div class="flex items-center justify-center mb-10">
+            <img src="assets/logo.png" width="96" height="106"/>
+            <h2 class="ml-[32px] text-[27px] font-medium text-[#ECECEC]">Qaree</h2>
+        </div>
+        <form>
+            <div class="flex flex-col gap-6">
+                <div>
+                    <label for="Email" class="block mb-2 text-sm font-medium text-white">Email</label>
+                    <input type="email" id="Email" class="bg-gray-50 text-gray-900 text-md rounded-lg block w-full p-2.5 placeholder-[#555555]" placeholder="Enter your email" required>
+                    <div class="p-2">
+                        <fa-icon [icon]="faEnvelope"> </fa-icon>
+                    </div>
+                </div>
+                <div>
+                    <label for="Password" class="block mb-2 text-sm font-medium text-white">Password</label>
+                    <input type="password" id="Password" class="bg-gray-50 text-[#555555] text-md rounded-lg block w-full p-2.5 placeholder-[#555555]" placeholder="Enter your Password" required>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

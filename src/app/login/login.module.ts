@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './component/login/login.component';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -11,7 +11,10 @@ import { LoginComponent } from './component/login/login.component';
   ],
   imports: [
     CommonModule,
-    LoginRoutingModule
+    LoginRoutingModule,
+    FontAwesomeModule
   ]
 })
-export class LoginModule { }
+export class LoginModule { 
+ 
+}
