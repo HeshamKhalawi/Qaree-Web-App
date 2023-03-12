@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
-
+import {LoginService} from '../../service/login.service'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -8,9 +9,19 @@ import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 })
 export class LoginComponent implements OnInit {
   faEnvelope = faEnvelope;
-  constructor() { }
+  public userEmail='';
+  public userPassword='';
+  constructor(service:LoginService,
+    public router: Router
+    ) {
+
+   }
 
   ngOnInit(): void {
   }
 
+
+  sendLoginData(){
+    this.router.navigate(['dashboard']);
+  }
 }

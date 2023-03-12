@@ -4,7 +4,7 @@ import { AuthService } from './commonServices/auth.service';
 
 const routes: Routes = [
   {
-    path: 'dashbaord',
+    path: 'dashboard',
     loadChildren: () =>
       import('./dashbaord/dashbaord.module').then((m) => m.DashbaordModule),
     canActivate: [AuthService],
@@ -14,8 +14,8 @@ const routes: Routes = [
     loadChildren: () =>
       import('./login/login.module').then((m) => m.LoginModule),
   },
-  { path: '', redirectTo: '/dashbaord', pathMatch: 'full' },
-  { path: '**', redirectTo: '/dashbaord' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/login' },
 ];
 
 @NgModule({
