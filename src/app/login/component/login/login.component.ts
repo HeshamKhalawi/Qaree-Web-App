@@ -8,7 +8,6 @@ import {LoginService} from '../../service/login.service'
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  faEnvelope = faEnvelope;
   public userEmail='';
   public userPassword='';
   constructor(service:LoginService,

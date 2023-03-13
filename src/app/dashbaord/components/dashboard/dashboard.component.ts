@@ -6,10 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
+  showLogoutConfirmation = false;
   constructor() { }
 
   ngOnInit(): void {
   }
+
+  toggleLogout(): void{
+    if(this.showLogoutConfirmation == true){
+      this.showLogoutConfirmation = false;
+    }
+    else{
+      this.showLogoutConfirmation = true;
+    }
+  }
+
 
 }

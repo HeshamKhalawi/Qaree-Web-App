@@ -1,1 +1,75 @@
-<p>user-management works!</p>
+<div class="mr-[50px] ml-[138px] mt-[45px]">
+    <h1 class="flex justify-center w-full mb-[95px] text-[22px]">Book Management</h1>
+    <div class="border border-black border-opacity-40 rounded-[1.5rem] p-4">
+        <div class="flex justify-between mb-4"> 
+            <div class="flex flex-col">
+                <h1 class="text-xl font-bold ">Books</h1>
+                <span class="text-sm text-[#B5B5C3]">102 books</span>
+            </div>
+            <form class="flex flex-row border">
+                <input class="px-4 py-1.5 w-2/3 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-400" type="text" placeholder="Search books...">
+            </form>
+            <div class="relative inline-block text-left">
+                <div>    
+                  <button type="button" class="inline-flex w-full justify-center gap-x-10 rounded-md bg-white px-3 py-1 text-md font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true" (click)="toggleDropdown()">
+                    <div class="flex">
+                        <svg width="20px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 8V5C4 4.44772 4.44772 4 5 4H19C19.5523 4 20 4.44772 20 5V8M4 8H20M4 8L9.28632 14.728C9.42475 14.9042 9.5 15.1218 9.5 15.3459V18.4612C9.5 19.1849 10.2449 19.669 10.9061 19.375L13.4061 18.2639C13.7673 18.1034 14 17.7453 14 17.3501V15.3699C14 15.1312 14.0854 14.9004 14.2407 14.7191L20 8" stroke="#000000" stroke-width="2" stroke-linecap="round"></path> </g></svg>
+                        Filter by: ID
+                    </div>
+                    <svg class="-mr-1 h-7 w-5 text-black" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                </div>
+                <div *ngIf="checkToggle" class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                    <div class="py-1" role="none">
+                        <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+                        <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-700" role="menuitem" tabindex="-1" id="menu-item-0">Name</a>
+                        <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-700" role="menuitem" tabindex="-1" id="menu-item-1">ID</a>
+                        <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-700" role="menuitem" tabindex="-1" id="menu-item-2">Date</a>
+                    </div>
+                </div>
+            </div>
+            <button>
+                t
+            </button>
+        </div>
+        <table class="w-full">
+            <thead>
+                <tr class="text-left">
+                    <th class="px-4 py-2">Name</th>
+                    <th class="px-4 py-2">ID</th>
+                    <th class="px-4 py-2">ISBN</th>
+                    <th class="px-4 py-2">Date</th>
+                    <th class="px-4 py-2">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-t">
+                    <td class="px-4 py-2">Book1</td>
+                    <td class="px-4 py-2">1</td>
+                    <td class="px-4 py-2">1234567890</td>
+                    <td class="px-4 py-2">2022-03-09</td>
+                    <td class="px-4 py-2">
+                        <button class="bg-[#F3F6F9] text-white font-bold p-1.5 rounded">
+                            <svg viewBox="0 0 1024 1024" width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" fill="#ff0000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#ff0000" d="M160 256H96a32 32 0 0 1 0-64h256V95.936a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32V192h256a32 32 0 1 1 0 64h-64v672a32 32 0 0 1-32 32H192a32 32 0 0 1-32-32V256zm448-64v-64H416v64h192zM224 896h576V256H224v640zm192-128a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32zm192 0a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32z"></path></g>
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+                <tr class="border-t">
+                    <td class="px-4 py-2">Book2</td>
+                    <td class="px-4 py-2">2</td>
+                    <td class="px-4 py-2">0987654321</td>
+                    <td class="px-4 py-2">2022-03-09</td>
+                    <td class="px-4 py-2">
+                        <button class="bg-[#F3F6F9] text-white font-bold p-1.5 rounded">
+                            <svg viewBox="0 0 1024 1024" width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" fill="#ff0000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#ff0000" d="M160 256H96a32 32 0 0 1 0-64h256V95.936a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32V192h256a32 32 0 1 1 0 64h-64v672a32 32 0 0 1-32 32H192a32 32 0 0 1-32-32V256zm448-64v-64H416v64h192zM224 896h576V256H224v640zm192-128a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32zm192 0a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32z"></path></g>
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
