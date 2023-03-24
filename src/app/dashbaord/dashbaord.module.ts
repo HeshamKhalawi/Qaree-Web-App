@@ -7,6 +7,7 @@ import { BookManagementComponent } from './components/book-management/book-manag
 import { GroupManagementComponent } from './components/group-management/group-management.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { ManagementTemplateComponent } from './components/management-template/management-template.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     BookManagementComponent,
     GroupManagementComponent,
     DashboardComponent,
-    NavigationComponent
+    NavigationComponent,
+    ManagementTemplateComponent
   ],
   imports: [
     CommonModule,

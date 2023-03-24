@@ -6,13 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-management.component.scss']
 })
 export class UserManagementComponent implements OnInit {
-  checkToggle = false;
+
+  //Set these information later from the DB
+  Title: string = 'User Management'
+  Type: string = 'Users'
+  Count: number = 0;
+  Filters: string[] = ["ID", "Name", "Email"]
+  Headers: string[] = ["Name", "ID", "Email", "Date Added"]
+  Items: any[][] = [["User1", 2018, "Hesham@gmail.com", "2019/3/20"], ["User2", 2010, "Hesham42@gmail.com","2018/2/5"], ["User2", 2010, "Hesham42@gmail.com","2018/2/5"], ["User2", 2010, "Hesham42@gmail.com","2018/2/5"], ["User2", 2010, "Hesham42@gmail.com","2018/2/5"], ["User2", 2010, "Hesham42@gmail.com","2018/2/5"]]
+
   constructor() { }
-
   ngOnInit(): void {
-  }
-
-  toggleDropdown(){
-    this.checkToggle = !this.checkToggle;
   }
 }
