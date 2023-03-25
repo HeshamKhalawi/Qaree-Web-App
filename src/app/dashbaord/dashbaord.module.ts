@@ -8,6 +8,7 @@ import { GroupManagementComponent } from './components/group-management/group-ma
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { ManagementTemplateComponent } from './components/management-template/management-template.component';
+import { ItemTableComponent } from './components/item-table/item-table.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ManagementTemplateComponent } from './components/management-template/ma
     GroupManagementComponent,
     DashboardComponent,
     NavigationComponent,
-    ManagementTemplateComponent
+    ManagementTemplateComponent,
+    ItemTableComponent
   ],
   imports: [
     CommonModule,

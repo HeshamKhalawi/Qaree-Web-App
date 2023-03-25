@@ -13,6 +13,9 @@ export class ManagementTemplateComponent implements OnInit {
   @Input() header?: string[];
   @Input() items?: any[][];
 
+  get Count(): number {
+    return this.items?.length ?? 0;
+  }
   ngOnInit(): void {
   }
 

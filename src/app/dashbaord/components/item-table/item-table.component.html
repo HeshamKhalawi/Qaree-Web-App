@@ -1,0 +1,55 @@
+<div class="p-4 relative mx-auto mr-[50px] ml-[50px] mt-[45px] min-w-[900px] border border-black border-opacity-40 rounded-md shadow-md">
+    <!-- If User Is Selected -->
+    <div *ngIf="userSelected">
+        <h1 class="text-center text-xl font-semibold mb-4 mt-1">Book1 Details</h1>
+        <div class="flex flex-wrap justify-between">
+            <!-- First Column -->
+            <div class="w-1/3 px-2">
+                <label class="block">Book Name</label>
+                <input type="text" class="input border border-[#C8CCD2] rounded-sm shadow-sm h-8 w-full max-w-xs" />
+                
+                <label class="block mt-4">Authors</label>
+                <input type="text" class="input border border-[#C8CCD2] rounded-sm shadow-sm h-8 w-full max-w-xs" />
+                
+                <label class="block mt-4">Description</label>
+                <input type="text" class="input border border-[#C8CCD2] rounded-sm shadow-sm h-8 w-full max-w-xs" />
+            </div>
+        
+            <!-- Second Column -->
+            <div class="w-1/3 px-2 ml-6">
+                <div class="flex flex-col">
+                    <label>Genre</label>
+                    <div class="flex overflow-x-scroll mt-2 ">
+                        <div class="flex mb-3">
+                            <div class="flex gap-2">
+                                <div class="badge bg-white text-black p-2.5 ">Action</div>
+                                <div class="badge bg-white text-black p-2.5 ">Adventure</div>
+                                <div class="badge bg-white text-black p-2.5 ">Horror</div>
+                                <div class="badge bg-white text-black p-2.5 ">Romance</div>
+                                <div class="badge bg-white text-black p-2.5 ">Comedy</div>
+                            </div>
+                            <button class="badge bg-white text-black p-2.5 ml-[0.5rem]">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <label class="block m-1">ID</label>
+                <input type="text" value="2018" disabled class="input border border-[#C8CCD2] rounded-sm shadow-sm h-8 w-full max-w-xs" />
+                
+                <label class="block mt-4">ISBN</label>
+                <input type="text" value="913-923-223-113" disabled class="input border border-[#C8CCD2] rounded-sm shadow-sm h-8 w-full max-w-xs" />
+            </div>
+        
+            <!-- Third Column -->
+            <div class="flex flex-col items-center px-2 mr-4">
+                <h3 class="text-lg font-semibold">Book Cover</h3>
+                <div class="h-[130px] w-[130px] bg-black opacity-30 rounded-xl"></div>
+                <button class="w-[70px] rounded-lg p-2 mt-4 text-white bg-green-700">Save</button>
+            </div>
+        </div>
+    </div>
+    <!-- If User Is Not Selected -->
+    <div *ngIf="!userSelected" class="flex justify-center items-center min-h-[17rem]">
+        <h1 class="font-bold text-xl">Select a book to view its details!</h1>
+    </div> 
+</div>
