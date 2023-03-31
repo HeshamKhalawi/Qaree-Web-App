@@ -1,18 +1,18 @@
 <div class="p-4 relative mx-auto mr-[50px] ml-[50px] mt-[45px] min-w-[900px] border border-black border-opacity-40 rounded-md shadow-md">
-    <!-- If User Is Selected -->
-    <div *ngIf="userSelected">
-        <h1 class="text-center text-xl font-semibold mb-4 mt-1">Book1 Details</h1>
+    <!-- If Book Is Selected -->
+    <div *ngIf="selectedBook">
+        <h1 class="text-center text-xl font-semibold mb-4 mt-1">{{selectedBook.Name}} Details</h1>
         <div class="flex flex-wrap justify-between">
             <!-- First Column -->
             <div class="w-1/3 px-2">
                 <label class="block">Book Name</label>
-                <input type="text" class="input border border-[#C8CCD2] rounded-sm shadow-sm h-8 w-full max-w-xs" />
+                <input type="text" value="{{selectedBook.Name}}" class="input border border-[#C8CCD2] rounded-sm shadow-sm h-8 w-full max-w-xs" />
                 
                 <label class="block mt-4">Authors</label>
-                <input type="text" class="input border border-[#C8CCD2] rounded-sm shadow-sm h-8 w-full max-w-xs" />
+                <input type="text" value="{{selectedBook.authors}}" class="input border border-[#C8CCD2] rounded-sm shadow-sm h-8 w-full max-w-xs" />
                 
                 <label class="block mt-4">Description</label>
-                <input type="text" class="input border border-[#C8CCD2] rounded-sm shadow-sm h-8 w-full max-w-xs" />
+                <input type="text" value="{{selectedBook.description}}" class="input border border-[#C8CCD2] rounded-sm shadow-sm h-8 w-full max-w-xs" />
             </div>
         
             <!-- Second Column -->
@@ -22,11 +22,7 @@
                     <div class="flex overflow-x-scroll mt-2 ">
                         <div class="flex mb-3">
                             <div class="flex gap-2">
-                                <div class="badge bg-white text-black p-2.5 ">Action</div>
-                                <div class="badge bg-white text-black p-2.5 ">Adventure</div>
-                                <div class="badge bg-white text-black p-2.5 ">Horror</div>
-                                <div class="badge bg-white text-black p-2.5 ">Romance</div>
-                                <div class="badge bg-white text-black p-2.5 ">Comedy</div>
+                                <div *ngFor="let genre of selectedBook.Genre;let i = index" class="badge bg-white text-black p-2.5 whitespace-nowrap">{{genre}}</div>
                             </div>
                             <button class="badge bg-white text-black p-2.5 ml-[0.5rem]">+</button>
                         </div>
@@ -34,10 +30,10 @@
                 </div>
 
                 <label class="block m-1">ID</label>
-                <input type="text" value="2018" disabled class="input border border-[#C8CCD2] rounded-sm shadow-sm h-8 w-full max-w-xs" />
+                <input type="text" value="{{selectedBook.ID}}" disabled class="input border border-[#C8CCD2] rounded-sm shadow-sm h-8 w-full max-w-xs" />
                 
                 <label class="block mt-4">ISBN</label>
-                <input type="text" value="913-923-223-113" disabled class="input border border-[#C8CCD2] rounded-sm shadow-sm h-8 w-full max-w-xs" />
+                <input type="text" value="{{selectedBook.ISBN}}" disabled class="input border border-[#C8CCD2] rounded-sm shadow-sm h-8 w-full max-w-xs" />
             </div>
         
             <!-- Third Column -->
@@ -48,8 +44,8 @@
             </div>
         </div>
     </div>
-    <!-- If User Is Not Selected -->
-    <div *ngIf="!userSelected" class="flex justify-center items-center min-h-[17rem]">
+    <!-- If Book Is Not Selected -->
+    <div *ngIf="!selectedBook" class="flex justify-center items-center min-h-[17rem]">
         <h1 class="font-bold text-xl">Select a book to view its details!</h1>
     </div> 
 </div>
