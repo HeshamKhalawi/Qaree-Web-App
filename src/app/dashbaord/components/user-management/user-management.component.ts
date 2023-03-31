@@ -17,7 +17,7 @@ export class UserManagementComponent implements OnInit {
       Name: "User1", 
       firstName: "Khaled", 
       lastName: "Ahmed", 
-      Email: "Hesham1@gmail.com", 
+      Email: "hesham1@gmail.com", 
       ID: 2018, 
       dateAdded: "2019/3/20"
     },

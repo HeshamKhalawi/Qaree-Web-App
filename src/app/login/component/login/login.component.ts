@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import {LoginService} from '../../service/login.service'
 @Component({
   selector: 'app-login',

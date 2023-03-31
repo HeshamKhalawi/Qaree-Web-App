@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, SimpleChanges, Renderer2, ElementRef  } from '@angular/core';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-management-template',
   templateUrl: './management-template.component.html',
@@ -11,8 +11,7 @@ export class ManagementTemplateComponent implements OnInit {
   @Input() filterBy?: string[];
   @Input() header?: string[];
   @Input() items: any[]=[];
-  constructor(private renderer: Renderer2, private el: ElementRef){
-
+  constructor(private renderer: Renderer2, private el: ElementRef, private datePipe: DatePipe){
   }
 
   //Search items in the main table
@@ -60,15 +59,15 @@ export class ManagementTemplateComponent implements OnInit {
     return this.items?.length ?? 0;
   }
 
-  //handle delete modal
-  openModal(item: any){
+  //Handle delete modal
+  openDeleteModal(item: any){
     this.selectedItem = item;
     const modal = this.el.nativeElement.querySelector('#delete-modal');
     if (modal) {
       this.renderer.addClass(modal, 'modal-open');
     }
   }
-  closeModal() {
+  closeDeleteModal() {
     const modal = this.el.nativeElement.querySelector('#delete-modal');
     if(modal)
       this.renderer.removeClass(modal, 'modal-open');
@@ -76,10 +75,54 @@ export class ManagementTemplateComponent implements OnInit {
   deleteItem() {
     this.items = this.items.filter(i => i.ID !== this.selectedItem.ID);
     this.filteredItems = this.filteredItems.filter(i => i.ID !== this.selectedItem.ID);
-    this.closeModal();
+    this.closeDeleteModal();
     this.selectedItem = null;
     this.filterItems(); 
   }
+
+  //Handle add user Modal
+  username: string = "";
+  firstName: string = "";
+  lastName: string = "";
+  email: string = "";
+  password: string = "";
+  openUserModal(){
+    const modal = this.el.nativeElement.querySelector('#new-user-modal');
+    if (modal) {
+      this.renderer.addClass(modal, 'modal-open');
+    }
+  }
+  closeUserModal() {
+    const modal = this.el.nativeElement.querySelector('#new-user-modal');
+    if(modal)
+      this.renderer.removeClass(modal, 'modal-open');
+  }
+  addUser(username: string, firstName: string, lastName: string, email: string, password: string){
+    //update database & assign an ID to the user
+    const currentDateObject = new Date();
+    const currentDate = this.datePipe.transform(currentDateObject, 'yyyy/MM/dd')
+    const ID = 10210 //dummy ID
+    this.items.push([username, firstName, lastName, email, ID, currentDate])
+    console.log(this.items)
+    this.closeUserModal();
+  }
+
+  //Handle add book Modal
+  openBookModal(){
+    const modal = this.el.nativeElement.querySelector('#new-book-modal');
+    if (modal) {
+      this.renderer.addClass(modal, 'modal-open');
+    }
+  }
+  closeBookModal() {
+    const modal = this.el.nativeElement.querySelector('#new-book-modal');
+    if(modal)
+      this.renderer.removeClass(modal, 'modal-open');
+  }
+  addBook(){
+    this.closeBookModal();
+  }
+
 
   ngOnInit(): void {
     this.filterItems();
@@ -89,5 +132,4 @@ export class ManagementTemplateComponent implements OnInit {
       this.filterItems();
     }
   }
-
 }
