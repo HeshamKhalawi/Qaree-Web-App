@@ -31,9 +31,9 @@ export class BookManagementComponent implements OnInit {
       ISBN: "978-3-16-148410-0",
       Genre: ["Comedy", "Drama", "Adventure", "Sci-fi"],  
       dateAdded: "2021/12/15"
-    },{Name: "Book4", authors: "Author6", description: "A guIDe to becoming financially independent", ID: 2019, ISBN: "978-4-12-147915-1",Genre: ["Comedy", "Drama", "Adventure", "Sci-fi"],  dateAdded: "2019/05/11"},
-    {Name: "Book5", authors: "Author7, Author8", description: "A comprehensive introduction to artificial intelligence", ID: 2022, ISBN: "978-1-09-950262-2",Genre: ["Comedy", "Drama", "Adventure", "Sci-fi"],  dateAdded: "2022/06/30"},
-    {Name: "Book6", authors: "Author9", description: "A cookbook filled with delicious and healthy recipes", ID: 2023, ISBN: "978-6-32-712840-1",Genre: ["Comedy", "Drama", "Adventure", "Sci-fi"],  dateAdded: "2023/09/18"}
+    },{Name: "Book3", authors: "Author6", description: "A guIDe to becoming financially independent", ID: 2019, ISBN: "978-4-12-147915-1",Genre: ["Comedy", "Drama", "Adventure", "Sci-fi"],  dateAdded: "2019/05/11"},
+    {Name: "Book4", authors: "Author7, Author8", description: "A comprehensive introduction to artificial intelligence", ID: 2022, ISBN: "978-1-09-950262-2",Genre: ["Comedy", "Drama", "Adventure", "Sci-fi"],  dateAdded: "2022/06/30"},
+    {Name: "Book5", authors: "Author9", description: "A cookbook filled with delicious and healthy recipes", ID: 2023, ISBN: "978-6-32-712840-1",Genre: ["Comedy", "Drama", "Adventure", "Sci-fi"],  dateAdded: "2023/09/18"}
 ]
 
   constructor() { }
@@ -47,7 +47,7 @@ interface Book {
   authors: string;
   description: string;
   ID: number;
-  ISBN: string;
+  ISBN?: string;
   Genre: string[];
   dateAdded: string;
 }

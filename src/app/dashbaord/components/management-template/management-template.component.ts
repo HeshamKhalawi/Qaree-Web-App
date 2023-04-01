@@ -3,7 +3,8 @@ import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-management-template',
   templateUrl: './management-template.component.html',
-  styleUrls: ['./management-template.component.scss']
+  styleUrls: ['./management-template.component.scss'],
+  providers: [DatePipe]
 })
 export class ManagementTemplateComponent implements OnInit {
   @Input() title?: string;
@@ -11,7 +12,7 @@ export class ManagementTemplateComponent implements OnInit {
   @Input() filterBy?: string[];
   @Input() header?: string[];
   @Input() items: any[]=[];
-  constructor(private renderer: Renderer2, private el: ElementRef, private datePipe: DatePipe){
+  constructor(private datePipe: DatePipe, private renderer: Renderer2, private el: ElementRef){
   }
 
   //Search items in the main table
@@ -97,17 +98,33 @@ export class ManagementTemplateComponent implements OnInit {
     if(modal)
       this.renderer.removeClass(modal, 'modal-open');
   }
-  addUser(username: string, firstName: string, lastName: string, email: string, password: string){
+  addUser(usernameProp: string, firstNameProp: string, lastNameProp: string, emailProp: string, passwordProp: string){
     //update database & assign an ID to the user
     const currentDateObject = new Date();
     const currentDate = this.datePipe.transform(currentDateObject, 'yyyy/MM/dd')
-    const ID = 10210 //dummy ID
-    this.items.push([username, firstName, lastName, email, ID, currentDate])
+    const IDProp = 10210 //dummy ID 
+    this.items.push(
+      {Name: usernameProp, 
+        firstName: firstNameProp, 
+        lastName: lastNameProp, 
+        Email: emailProp, 
+        ID: IDProp, 
+        dateAdded: currentDate 
+      }
+      )
     console.log(this.items)
     this.closeUserModal();
   }
 
   //Handle add book Modal
+  bookName: string = "";
+  bookDescription: string = "";
+  publishDate: string = "";
+  authors: string = "";
+  pages: number = 0;
+  genres: string = "";
+  image: any = "";
+
   openBookModal(){
     const modal = this.el.nativeElement.querySelector('#new-book-modal');
     if (modal) {
@@ -119,8 +136,29 @@ export class ManagementTemplateComponent implements OnInit {
     if(modal)
       this.renderer.removeClass(modal, 'modal-open');
   }
-  addBook(){
+  addBook(bookNameProp: string,bookDescriptionProp: string, publishDateProp: string, authorsProp: string, pagesProp: number, genresProp: string, imageProp: any){
+    //update database & assign an ID to the book
+    const currentDate = this.datePipe.transform(publishDateProp, 'yyyy/MM/dd')
+    const IDProp = 20144 // Get the ID of the book from the database
+    const genreArray = genresProp.split(',').map(genre => genre.trim())
+    this.items.push(
+      { Name: bookNameProp, 
+        authors: authorsProp, 
+        description: bookDescriptionProp, 
+        ID: IDProp, 
+        Genre: genreArray, 
+        dateAdded: currentDate 
+      }
+      )
     this.closeBookModal();
+  }
+
+  //Get updated item from detailed table
+  onUpdatedItem(item: any): void{
+    console.log(item);
+    const index = this.items.findIndex(i => i.ID === item.ID);
+    if(index !== -1)
+      this.items[index] = item;
   }
 
 

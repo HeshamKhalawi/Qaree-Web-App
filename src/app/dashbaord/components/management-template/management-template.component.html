@@ -66,9 +66,9 @@
             </div>
         </div>
     </div>
-    <app-user-details *ngIf="type === 'Users'"  [selectedUser]="selectedItem"> </app-user-details>
+    <app-user-details *ngIf="type === 'Users'"  [selectedUser]="selectedItem" (updatedUser)="onUpdatedItem($event)"> </app-user-details>
     <app-group-details *ngIf="type === 'Groups'" [selectedGroup]="selectedItem"> </app-group-details>
-    <app-book-details *ngIf="type === 'Books'" [selectedBook]="selectedItem"> </app-book-details>
+    <app-book-details *ngIf="type === 'Books'" [selectedBook]="selectedItem" (updatedBook)="onUpdatedItem($event)"> </app-book-details>
 </div>
 <!--Delete Modal-->
 <div class="modal" id="delete-modal">
@@ -85,34 +85,61 @@
 <!--Create User Modal-->
 <div class="modal" id="new-user-modal">
     <div class="modal-box flex flex-col justify-center items-center w-fit p-3 bg-[#F6F7F8]">
-        <div class="mx-4" >
+        <form class="mx-4" >
             <h3 class=" flex justify-center font-bold text-xl">Add a User</h3>
             <label class="block mt-2">Username</label>
-            <input [(ngModel)]="username" type="text" class="border border-[#C8CCD2] rounded-sm shadow-sm h-7 w-[250px]" />
+            <input [(ngModel)]="username" type="text" class="border border-[#C8CCD2] rounded-sm shadow-sm h-7 w-[250px]" name="username"/>
             
             <label class="block mt-4">First Name</label>
-            <input [(ngModel)]="firstName" type="text" class="border border-[#C8CCD2] rounded-sm shadow-sm h-7 w-[250px]" />
+            <input [(ngModel)]="firstName" type="text" class="border border-[#C8CCD2] rounded-sm shadow-sm h-7 w-[250px]" name="firstName"/>
             
             <label class="block mt-4">Last Name</label>
-            <input [(ngModel)]="lastName" type="text" class="border border-[#C8CCD2] rounded-sm shadow-sm h-7 w-[250px]" />
+            <input [(ngModel)]="lastName" type="text" class="border border-[#C8CCD2] rounded-sm shadow-sm h-7 w-[250px]" name="lastName"/>
         
             <label class="block mt-4">E-Mail Address</label>
-            <input [(ngModel)]="email" type="email" class="border border-[#C8CCD2] rounded-sm shadow-sm h-7 w-[250px]" />
+            <input [(ngModel)]="email" type="email" class="border border-[#C8CCD2] rounded-sm shadow-sm h-7 w-[250px]" name="email"/>
             
             <label class="block mt-4">Password</label>
-            <input [(ngModel)]="password" type="password" class="border p-0.5 border-[#C8CCD2] rounded-sm shadow-sm h-7 w-[250px]" />
+            <input [(ngModel)]="password" type="password" class="border p-0.5 border-[#C8CCD2] rounded-sm shadow-sm h-7 w-[250px]" name="password"/>
             
             <div class="mt-8 flex justify-end space-x-2">
                 <button (click)="closeUserModal()" class="w-[70px] p-1 rounded-lg text-white bg-red-600">Cancel</button>
                 <button (click)="addUser(username, firstName, lastName, email, password)" class="w-[70px] p-1 rounded-lg text-white bg-green-500">Add</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>   
 <!--Create Book  Modal-->
 <div class="modal" id="new-book-modal">
     <div class="modal-box flex flex-col justify-center items-center w-fit p-6">
-        <form class="">
+        <form class="mx-4">
+            <h3 class=" flex justify-center font-bold text-xl">Add a Book</h3>
+            
+            <label class="block mt-2">Name</label>
+            <input [(ngModel)]="bookName" required type="text" class="border border-[#C8CCD2] rounded-sm shadow-sm h-7 w-[350px]" name="bookName"/>
+
+            <label class="block mt-4">Description</label>
+            <textarea [(ngModel)]="bookDescription" required class="textarea textarea-bordered w-[350px]" name="bookDescription"></textarea>
+            
+            <label class="block mt-4">Publish Date</label>
+            <input [(ngModel)]="publishDate" required type="date" class="border border-[#C8CCD2] rounded-sm shadow-sm h-7 w-[350px]" name="publishDate"/>
+        
+            <label class="block mt-4">Authors</label>
+            <input [(ngModel)]="authors" required type="text" class="border border-[#C8CCD2] rounded-sm shadow-sm h-7 w-[350px]" name="authors"/>
+            
+            <label class="block mt-4">Number of Pages</label>
+            <input [(ngModel)]="pages" required type="number" pattern="\d+" class="border p-0.5 border-[#C8CCD2] rounded-sm shadow-sm h-7 w-[350px]" name="pages"/>
+
+            <label class="block mt-4">Genres <span class="text-sm">(comma separated list)</span></label>
+            <input [(ngModel)]="genres" required type="text" class="border border-[#C8CCD2] rounded-sm shadow-sm h-7 w-[350px]" name="genres"/>
+            
+            <label class="block mt-4">Image</label>
+            <input type="file" accept="image/*" required class="file-input file-input-bordered file-input-sm w-[350px]" name="image"/>
+            
+            <div class="mt-8 flex justify-end space-x-2">
+                <button (click)="closeBookModal()" class="w-[70px] p-1 rounded-lg text-white bg-red-600">Cancel</button>
+                <button (click)="addBook(bookName, bookDescription, publishDate, authors, pages, genres, image)" class="w-[70px] p-1 rounded-lg text-white bg-green-500">Add</button>
+            </div>
         </form>
     </div>
 </div> 
