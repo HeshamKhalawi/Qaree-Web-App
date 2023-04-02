@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import {LoginService} from '../../service/login.service'
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
