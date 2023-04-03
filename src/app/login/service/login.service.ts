@@ -37,6 +37,8 @@ export class LoginService {
     this.isUserAnAdmin(email).then((result) => {
       if (result.length >0) {
         this.authWithFirebase(email,password);
+      }else{
+        alert("Invalid Credintials")
       }
     });
 
@@ -64,7 +66,7 @@ authWithFirebase(email:string,password:string){
         });
       })
       .catch((error) => {
-        window.alert(error.message);
+        window.alert("Invalid Credintials");
       });
 }
 
