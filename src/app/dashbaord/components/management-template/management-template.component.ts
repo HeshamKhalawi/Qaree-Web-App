@@ -15,6 +15,7 @@ export class ManagementTemplateComponent implements OnInit {
   constructor(private datePipe: DatePipe, private renderer: Renderer2, private el: ElementRef){
   }
 
+
   //Search items in the main table
   searchTerm: string = '';
   filteredItems: any[]= this.items;
@@ -23,10 +24,10 @@ export class ManagementTemplateComponent implements OnInit {
     if (!this.searchTerm) {
       this.filteredItems = this.items;
     } else {
-    this.filteredItems = this.items.filter(item => {
-      return item.Name.toLowerCase().includes(searchTerm) ||
-        item.ID.toString().toLowerCase().includes(searchTerm) ||
-        (item.ISBN && item.ISBN.toLowerCase().includes(searchTerm)) ||
+      this.filteredItems = this.items.filter(item => {
+      return item.name.toLowerCase().includes(searchTerm) ||
+        item.id.toString().toLowerCase().includes(searchTerm) ||
+        (item.isbn[0] && item.isbn[0].toLowerCase().includes(searchTerm)) ||
         (item.groupMembers && item.groupMembers.some((member: string) => member.toLowerCase().includes(searchTerm))) ||
         (item.Email && item.Email.toLowerCase().includes(searchTerm));
       })
@@ -40,7 +41,7 @@ export class ManagementTemplateComponent implements OnInit {
   }
   
 
-  // filter table based on dropdown menu
+  // filter table based on dropdown menu option
   currentFilter: string = "";
   sortTable(filter: string): void {
     this.currentFilter = filter;
@@ -74,8 +75,8 @@ export class ManagementTemplateComponent implements OnInit {
       this.renderer.removeClass(modal, 'modal-open');
   }
   deleteItem() {
-    this.items = this.items.filter(i => i.ID !== this.selectedItem.ID);
-    this.filteredItems = this.filteredItems.filter(i => i.ID !== this.selectedItem.ID);
+    this.items = this.items.filter(i => i.id !== this.selectedItem.id);
+    this.filteredItems = this.filteredItems.filter(i => i.id !== this.selectedItem.id);
     this.closeDeleteModal();
     this.selectedItem = null;
     this.filterItems(); 
@@ -104,11 +105,11 @@ export class ManagementTemplateComponent implements OnInit {
     const currentDate = this.datePipe.transform(currentDateObject, 'yyyy/MM/dd')
     const IDProp = 10210 //dummy ID 
     this.items.push(
-      {Name: usernameProp, 
+      {name: usernameProp, 
         firstName: firstNameProp, 
         lastName: lastNameProp, 
         Email: emailProp, 
-        ID: IDProp, 
+        id: IDProp, 
         dateAdded: currentDate 
       }
       )
@@ -142,12 +143,12 @@ export class ManagementTemplateComponent implements OnInit {
     const IDProp = 20144 // Get the ID of the book from the database
     const genreArray = genresProp.split(',').map(genre => genre.trim())
     this.items.push(
-      { Name: bookNameProp, 
+      { name: bookNameProp, 
         authors: authorsProp, 
         description: bookDescriptionProp, 
-        ID: IDProp, 
-        Genre: genreArray, 
-        dateAdded: currentDate 
+        id: IDProp, 
+        genres: genreArray, 
+        publishDate: currentDate 
       }
       )
     this.closeBookModal();
@@ -161,9 +162,9 @@ export class ManagementTemplateComponent implements OnInit {
       this.items[index] = item;
   }
 
-
   ngOnInit(): void {
     this.filterItems();
+    console.log(this.items);
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['items'] && changes['items'].currentValue) {

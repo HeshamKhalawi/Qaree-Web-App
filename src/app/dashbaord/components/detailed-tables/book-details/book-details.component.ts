@@ -29,6 +29,7 @@ export class BookDetailsComponent implements OnInit, OnChanges {
   }
   saveChanges(): void {
     this.selectedBook = JSON.parse(JSON.stringify(this.editedBook))
+    console.log(this.selectedBook)
     this.updatedBook.emit(this.selectedBook)
     //update DB
     this.isChanged = false;
