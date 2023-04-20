@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges, Renderer2, ElementRef  } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, Renderer2, ElementRef  } from '@angular/core';
 import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-management-template',
@@ -12,9 +12,11 @@ export class ManagementTemplateComponent implements OnInit {
   @Input() filterBy?: string[];
   @Input() header?: string[];
   @Input() items: any[]=[];
+  @Input() isLoading: boolean = false;
+  @Output() loadMore = new EventEmitter<void>();
+
   constructor(private datePipe: DatePipe, private renderer: Renderer2, private el: ElementRef){
   }
-
 
   //Search items in the main table
   searchTerm: string = '';
@@ -124,7 +126,8 @@ export class ManagementTemplateComponent implements OnInit {
   authors: string = "";
   pages: number = 0;
   genres: string = "";
-  image: any = "";
+  image: string = "";
+
 
   openBookModal(){
     const modal = this.el.nativeElement.querySelector('#new-book-modal');
@@ -137,18 +140,33 @@ export class ManagementTemplateComponent implements OnInit {
     if(modal)
       this.renderer.removeClass(modal, 'modal-open');
   }
-  addBook(bookNameProp: string,bookDescriptionProp: string, publishDateProp: string, authorsProp: string, pagesProp: number, genresProp: string, imageProp: any){
+  //Handle image upload
+  onFileChange(event: any) {
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.image = reader.result as string;
+      };
+    }
+  }
+  addBook(bookNameProp: string,bookDescriptionProp: string, publishDateProp: string, authorsProp: string, pagesProp: number, genresProp: string){
     //update database & assign an ID to the book
     const currentDate = this.datePipe.transform(publishDateProp, 'yyyy/MM/dd')
     const IDProp = 20144 // Get the ID of the book from the database
     const genreArray = genresProp.split(',').map(genre => genre.trim())
+    const authorsArray = authorsProp.split(',').map(authors => authors.trim())
     this.items.push(
       { name: bookNameProp, 
-        authors: authorsProp, 
+        authors: authorsArray, 
         description: bookDescriptionProp, 
         id: IDProp, 
         genres: genreArray, 
-        publishDate: currentDate 
+        publishDate: currentDate,
+        image: this.image
       }
       )
     this.closeBookModal();
@@ -157,14 +175,13 @@ export class ManagementTemplateComponent implements OnInit {
   //Get updated item from detailed table
   onUpdatedItem(item: any): void{
     console.log(item);
-    const index = this.items.findIndex(i => i.ID === item.ID);
+    const index = this.items.findIndex(i => i.id === item.id);
     if(index !== -1)
       this.items[index] = item;
   }
 
   ngOnInit(): void {
     this.filterItems();
-    console.log(this.items);
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['items'] && changes['items'].currentValue) {

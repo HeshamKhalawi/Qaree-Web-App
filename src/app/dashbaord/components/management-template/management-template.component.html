@@ -48,11 +48,11 @@
                                 <td class="px-4 py-2">
                                 {{ 
                                     item.isbn && item.isbn[0] != "" ? item.isbn[0] :
-                                    item.groupMembers ? (item.groupMembers.slice(0, 2).join(', ') + (item.groupMembers.length > 2 ? '...' : '')): 
+                                    item.members ? (item.members.slice(0, 2).join(', ') + (item.members.length > 2 ? '...' : '')): 
                                     item.Email ? item.Email : "None"
                                 }}
                                 </td>
-                                <td class="px-4 py-2">{{(item.publishDate ? item.publishDate : item.dateAdded) | date: 'yyyy/MM/dd' : 'UTC'}}</td>                                
+                                <td class="px-4 py-2">{{(item.publishDate ? item.publishDate : item.createdAt) | date: 'yyyy/MM/dd' : 'UTC'}}</td>                                
                                 <td class="px-4 py-2">
                                     <button (click)="openDeleteModal(item)" class="bg-[#F3F6F9] text-white font-bold p-1.5 rounded">
                                         <svg viewBox="0 0 1024 1024" width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" fill="#ff0000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#ff0000" d="M160 256H96a32 32 0 0 1 0-64h256V95.936a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32V192h256a32 32 0 1 1 0 64h-64v672a32 32 0 0 1-32 32H192a32 32 0 0 1-32-32V256zm448-64v-64H416v64h192zM224 896h576V256H224v640zm192-128a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32zm192 0a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32z"></path></g>
@@ -127,7 +127,7 @@
             <label class="block mt-4">Publish Date</label>
             <input [(ngModel)]="publishDate" required type="date" class="border border-[#C8CCD2] rounded-sm shadow-sm h-7 w-[350px]" name="publishDate"/>
         
-            <label class="block mt-4">Authors</label>
+            <label class="block mt-4">Authors <span class="text-sm">(comma separated list)</span></label>
             <input [(ngModel)]="authors" required type="text" class="border border-[#C8CCD2] rounded-sm shadow-sm h-7 w-[350px]" name="authors"/>
             
             <label class="block mt-4">Number of Pages</label>
@@ -137,11 +137,11 @@
             <input [(ngModel)]="genres" required type="text" class="border border-[#C8CCD2] rounded-sm shadow-sm h-7 w-[350px]" name="genres"/>
             
             <label class="block mt-4">Image</label>
-            <input type="file" accept="image/*" required class="file-input file-input-bordered file-input-sm w-[350px]" name="image"/>
+            <input type="file" accept="image/*" required class="file-input file-input-bordered file-input-sm w-[350px]" name="image" (change)="onFileChange($event)"/>
             
             <div class="mt-8 flex justify-end space-x-2">
                 <button (click)="closeBookModal()" class="w-[70px] p-1 rounded-lg text-white bg-red-600">Cancel</button>
-                <button (click)="addBook(bookName, bookDescription, publishDate, authors, pages, genres, image)" class="w-[70px] p-1 rounded-lg text-white bg-green-500">Add</button>
+                <button (click)="addBook(bookName, bookDescription, publishDate, authors, pages, genres)" class="w-[70px] p-1 rounded-lg text-white bg-green-500">Add</button>
             </div>
         </form>
     </div>

@@ -16,43 +16,49 @@ export class GroupManagementComponent implements OnInit {
       name: "GroupQ",
       groupLink: "link.sh/122124",
       id: 2018, 
-      groupMembers: ["User1", "User2", "User3"], 
-      dateAdded: "2019/3/20"
+      members: ["User1", "User2", "User3"], 
+      createdAt: "2019/3/20",
+      image: "URL"
     },
     {
       name: "GroupA",
       groupLink: "link.sh/35468",
       id: 2022,
-      groupMembers: ["User1", "User2", "User3"],
-      dateAdded: "2022/08/15"
+      members: ["User1", "User2", "User3"],
+      createdAt: "2022/08/15",
+      image: "URL"
     },
     {
       name: "GroupB",
       groupLink: "link.sh/32145",
       id: 2020,
-      groupMembers: ["User1", "User2", "User3"],
-      dateAdded: "2020/06/23"
+      members: ["User1", "User2", "User3"],
+      createdAt: "2020/06/23",
+      image: "URL"
     },
     {
       name: "GroupC",
       groupLink: "link.sh/98456",
       id: 2019,
-      groupMembers: ["User1", "User2", "User3"],
-      dateAdded: "2019/03/12"
+      members: ["User1", "User2", "User3"],
+      createdAt: "2019/03/12",
+      image: "URL"
     },
     {
       name: "GroupD",
       groupLink: "link.sh/73264",
       id: 2023,
-      groupMembers: ["User1", "User2", "User3"],
-      dateAdded: "2023/01/28"
+      members: ["User1", "User2", "User3"],
+      createdAt: "2023/01/28",
+      image: "URL"
     },
     {
       name: "GroupE",
       groupLink: "link.sh/54628",
       id: 2021,
-      groupMembers: ["User1", "User2", "User3"],
-      dateAdded: "2021/11/05"
+      members: ["User1", "User2", "User3"],
+      createdAt: "2021/11/05",
+      image: "URL"
     }
 ]
 
@@ -66,6 +72,7 @@ interface Group {
   name: string;
   groupLink: string;
   id: number;
-  groupMembers: String[];
-  dateAdded: string;
+  members: String[];
+  createdAt: string;
+  image: string;
 }

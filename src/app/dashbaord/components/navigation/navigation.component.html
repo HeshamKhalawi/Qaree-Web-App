@@ -16,7 +16,7 @@
             </li>
         </ul>
     </div>
-    <button *ngIf="showLogoutConfirmation" class="flex text-white bg-red-500 rounded-md font-semibold p-2">Logout</button>
+    <button *ngIf="showLogoutConfirmation" (click)="SignOut()" class="flex text-white bg-red-500 rounded-md font-semibold p-2">Logout</button>
     <button class="flex items-center justify-between p-4" (click)="toggleLogout()">
         <div class="flex items-center">
             <svg class="rounded-full mr-4" xmlns="http://www.w3.org/2000/svg" width="44px" height="44px" enable-background="new 312.809 0 401 401" version="1.1" viewBox="312.809 0 401 401">
@@ -27,7 +27,7 @@
                 </g>
             </svg>
             <div class="flex flex-col">
-                <h2 class="text-white font-medium">Hesham</h2>
+                <h2 class="text-white font-medium">Name</h2>
                 <h3 class="text-sm text-gray-400">Logged in</h3>
             </div>
         </div>

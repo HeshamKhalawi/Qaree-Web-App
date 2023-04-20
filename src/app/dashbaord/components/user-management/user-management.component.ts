@@ -19,7 +19,7 @@ export class UserManagementComponent implements OnInit {
       lastName: "Ahmed", 
       Email: "hesham1@gmail.com", 
       id: 2018, 
-      dateAdded: "2019/3/20"
+      createdAt: "2019/3/20"
     },
     {
       name: "User2",
@@ -27,7 +27,7 @@ export class UserManagementComponent implements OnInit {
       lastName: "Smith",
       Email: "megan.smith@example.com",
       id: 2022,
-      dateAdded: "2022/11/02"
+      createdAt: "2022/11/02"
     },
     {
       name: "User3",
@@ -35,7 +35,7 @@ export class UserManagementComponent implements OnInit {
       lastName: "Gonzalez",
       Email: "jgonzalez@mail.com",
       id: 2020,
-      dateAdded: "2020/07/12"
+      createdAt: "2020/07/12"
     },
     {
       name: "User4",
@@ -43,7 +43,7 @@ export class UserManagementComponent implements OnInit {
       lastName: "Jones",
       Email: "emjones@example.com",
       id: 2019,
-      dateAdded: "2019/05/11"
+      createdAt: "2019/05/11"
     },
     {
       name: "User5",
@@ -51,7 +51,7 @@ export class UserManagementComponent implements OnInit {
       lastName: "Johnson",
       Email: "markjohnson@mail.com",
       id: 2023,
-      dateAdded: "2023/02/15"
+      createdAt: "2023/02/15"
     },
     {
       name: "User6",
@@ -59,7 +59,7 @@ export class UserManagementComponent implements OnInit {
       lastName: "Brown",
       Email: "sarahbrown@example.com",
       id: 2021,
-      dateAdded: "2021/09/18"
+      createdAt: "2021/09/18"
     }
 ]
 
@@ -74,5 +74,5 @@ interface User {
   lastName: string;
   Email: string;
   id: number;
-  dateAdded: string;
+  createdAt: string;
 }

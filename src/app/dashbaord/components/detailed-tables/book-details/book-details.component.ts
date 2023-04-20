@@ -18,7 +18,6 @@ export class BookDetailsComponent implements OnInit, OnChanges {
     }
   }
 
-  //Genre: String[] = this.selectedBook.Genre;
   constructor() { }
 
   ngOnInit(): void {
