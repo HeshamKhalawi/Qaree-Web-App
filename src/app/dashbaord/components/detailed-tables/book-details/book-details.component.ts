@@ -18,17 +18,23 @@ export class BookDetailsComponent implements OnInit, OnChanges {
     }
   }
 
-  //Genre: String[] = this.selectedBook.Genre;
   constructor() { }
 
   ngOnInit(): void {
     
   }
+
+  addAuthor(): void {
+    this.editedBook.authors.push('');
+    this.onInputChange();
+  }
   onInputChange(): void {
+    console.log(JSON.stringify(this.selectedBook) + ", edited: " + JSON.stringify(this.editedBook));
     this.isChanged = JSON.stringify(this.selectedBook) !== JSON.stringify(this.editedBook)
   }
   saveChanges(): void {
     this.selectedBook = JSON.parse(JSON.stringify(this.editedBook))
+    console.log(this.selectedBook)
     this.updatedBook.emit(this.selectedBook)
     //update DB
     this.isChanged = false;

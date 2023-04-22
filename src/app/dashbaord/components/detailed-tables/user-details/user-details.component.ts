@@ -10,7 +10,7 @@ export class UserDetailsComponent implements OnInit, OnChanges {
   @Output() updatedUser: any = new EventEmitter<any>();
   editedUser: any = null;
   isChanged: boolean = false;
-  
+
   constructor() { }
 
   ngOnInit(): void {

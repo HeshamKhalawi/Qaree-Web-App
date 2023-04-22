@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges, Renderer2, ElementRef  } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, Renderer2, ElementRef  } from '@angular/core';
 import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-management-template',
@@ -12,6 +12,9 @@ export class ManagementTemplateComponent implements OnInit {
   @Input() filterBy?: string[];
   @Input() header?: string[];
   @Input() items: any[]=[];
+  @Input() isLoading: boolean = false;
+  @Output() loadMore = new EventEmitter<void>();
+
   constructor(private datePipe: DatePipe, private renderer: Renderer2, private el: ElementRef){
   }
 
@@ -23,10 +26,10 @@ export class ManagementTemplateComponent implements OnInit {
     if (!this.searchTerm) {
       this.filteredItems = this.items;
     } else {
-    this.filteredItems = this.items.filter(item => {
-      return item.Name.toLowerCase().includes(searchTerm) ||
-        item.ID.toString().toLowerCase().includes(searchTerm) ||
-        (item.ISBN && item.ISBN.toLowerCase().includes(searchTerm)) ||
+      this.filteredItems = this.items.filter(item => {
+      return item.name.toLowerCase().includes(searchTerm) ||
+        item.id.toString().toLowerCase().includes(searchTerm) ||
+        (item.isbn[0] && item.isbn[0].toLowerCase().includes(searchTerm)) ||
         (item.groupMembers && item.groupMembers.some((member: string) => member.toLowerCase().includes(searchTerm))) ||
         (item.Email && item.Email.toLowerCase().includes(searchTerm));
       })
@@ -40,7 +43,7 @@ export class ManagementTemplateComponent implements OnInit {
   }
   
 
-  // filter table based on dropdown menu
+  // filter table based on dropdown menu option
   currentFilter: string = "";
   sortTable(filter: string): void {
     this.currentFilter = filter;
@@ -74,8 +77,8 @@ export class ManagementTemplateComponent implements OnInit {
       this.renderer.removeClass(modal, 'modal-open');
   }
   deleteItem() {
-    this.items = this.items.filter(i => i.ID !== this.selectedItem.ID);
-    this.filteredItems = this.filteredItems.filter(i => i.ID !== this.selectedItem.ID);
+    this.items = this.items.filter(i => i.id !== this.selectedItem.id);
+    this.filteredItems = this.filteredItems.filter(i => i.id !== this.selectedItem.id);
     this.closeDeleteModal();
     this.selectedItem = null;
     this.filterItems(); 
@@ -104,11 +107,11 @@ export class ManagementTemplateComponent implements OnInit {
     const currentDate = this.datePipe.transform(currentDateObject, 'yyyy/MM/dd')
     const IDProp = 10210 //dummy ID 
     this.items.push(
-      {Name: usernameProp, 
+      {name: usernameProp, 
         firstName: firstNameProp, 
         lastName: lastNameProp, 
         Email: emailProp, 
-        ID: IDProp, 
+        id: IDProp, 
         dateAdded: currentDate 
       }
       )
@@ -123,7 +126,8 @@ export class ManagementTemplateComponent implements OnInit {
   authors: string = "";
   pages: number = 0;
   genres: string = "";
-  image: any = "";
+  image: string = "";
+
 
   openBookModal(){
     const modal = this.el.nativeElement.querySelector('#new-book-modal');
@@ -136,18 +140,33 @@ export class ManagementTemplateComponent implements OnInit {
     if(modal)
       this.renderer.removeClass(modal, 'modal-open');
   }
-  addBook(bookNameProp: string,bookDescriptionProp: string, publishDateProp: string, authorsProp: string, pagesProp: number, genresProp: string, imageProp: any){
+  //Handle image upload
+  onFileChange(event: any) {
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.image = reader.result as string;
+      };
+    }
+  }
+  addBook(bookNameProp: string,bookDescriptionProp: string, publishDateProp: string, authorsProp: string, pagesProp: number, genresProp: string){
     //update database & assign an ID to the book
     const currentDate = this.datePipe.transform(publishDateProp, 'yyyy/MM/dd')
     const IDProp = 20144 // Get the ID of the book from the database
     const genreArray = genresProp.split(',').map(genre => genre.trim())
+    const authorsArray = authorsProp.split(',').map(authors => authors.trim())
     this.items.push(
-      { Name: bookNameProp, 
-        authors: authorsProp, 
+      { name: bookNameProp, 
+        authors: authorsArray, 
         description: bookDescriptionProp, 
-        ID: IDProp, 
-        Genre: genreArray, 
-        dateAdded: currentDate 
+        id: IDProp, 
+        genres: genreArray, 
+        publishDate: currentDate,
+        image: this.image
       }
       )
     this.closeBookModal();
@@ -156,11 +175,10 @@ export class ManagementTemplateComponent implements OnInit {
   //Get updated item from detailed table
   onUpdatedItem(item: any): void{
     console.log(item);
-    const index = this.items.findIndex(i => i.ID === item.ID);
+    const index = this.items.findIndex(i => i.id === item.id);
     if(index !== -1)
       this.items[index] = item;
   }
-
 
   ngOnInit(): void {
     this.filterItems();
