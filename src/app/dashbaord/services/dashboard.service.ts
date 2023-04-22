@@ -12,6 +12,6 @@ export class DashboardService {
   constructor(private store: AngularFirestore) { }
 
   getAll(collection:string){
-    return this.store.collection(collection).valueChanges() as Observable<Book[]>
+    return this.store.collection(collection).valueChanges() as Observable<any>
   }
 }
