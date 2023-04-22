@@ -11,7 +11,7 @@ export class GroupManagementComponent implements OnInit {
   //Set these information later from the DB
   Title: string = 'Group Management'
   Type: string = 'Groups'
-  Filters: string[] = ["ID", "Name"]
+  Filters: string[] = ["id", "name"]
   Headers: string[] = ["Name", "ID", "Members ", "Date Added"]
   Items: Group[] = []
 

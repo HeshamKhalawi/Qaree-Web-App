@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {LoginService} from '../../../login/service/login.service'
 
 @Component({
   selector: 'app-navigation',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
   showLogoutConfirmation = false;
-  constructor() { }
+  constructor(private service:LoginService) { }
 
   ngOnInit(): void {
+  }
+
+  SignOut(){
+    this.service.SignOut();
   }
   toggleLogout(): void{
     if(this.showLogoutConfirmation == true){
