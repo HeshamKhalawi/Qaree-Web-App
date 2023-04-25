@@ -20,7 +20,6 @@ export class BookManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getAll('Books').subscribe((res)=>{
-      console.log(res)
       this.Items=res
     })
   }

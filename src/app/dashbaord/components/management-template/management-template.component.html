@@ -49,7 +49,7 @@
                                 {{ 
                                     item.isbn && item.isbn[0] != "" ? item.isbn[0] :
                                     item.members ? (item.members.slice(0, 2).join(', ') + (item.members.length > 2 ? '...' : '')): 
-                                    item.Email ? item.Email : "None"
+                                    item.email ? item.email : "None"
                                 }}
                                 </td>
                                 <td class="px-4 py-2">{{(item.publishDate ? item.publishDate : item.createdAtFormatted) | date: 'yyyy/MM/dd' : 'UTC'}}</td>                                

@@ -31,7 +31,7 @@ export class ManagementTemplateComponent implements OnInit {
         item.id.toString().toLowerCase().includes(searchTerm) ||
         (item.isbn[0] && item.isbn[0].toLowerCase().includes(searchTerm)) ||
         (item.groupMembers && item.groupMembers.some((member: string) => member.toLowerCase().includes(searchTerm))) ||
-        (item.Email && item.Email.toLowerCase().includes(searchTerm));
+        (item.email && item.email.toLowerCase().includes(searchTerm));
       })
     } 
   }
