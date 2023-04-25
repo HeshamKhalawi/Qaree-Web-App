@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, Renderer2, ElementRef  } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { DashboardService } from '../../services/dashboard.service';
 @Component({
   selector: 'app-management-template',
   templateUrl: './management-template.component.html',
@@ -15,7 +16,7 @@ export class ManagementTemplateComponent implements OnInit {
   @Input() isLoading: boolean = false;
   @Output() loadMore = new EventEmitter<void>();
 
-  constructor(private datePipe: DatePipe, private renderer: Renderer2, private el: ElementRef){
+  constructor(private datePipe: DatePipe, private renderer: Renderer2, private el: ElementRef,private service:DashboardService){
   }
 
   //Search items in the main table
@@ -155,20 +156,17 @@ export class ManagementTemplateComponent implements OnInit {
   }
   addBook(bookNameProp: string,bookDescriptionProp: string, publishDateProp: string, authorsProp: string, pagesProp: number, genresProp: string){
     //update database & assign an ID to the book
-    const currentDate = this.datePipe.transform(publishDateProp, 'yyyy/MM/dd')
+    const currentDate = this.datePipe.transform(publishDateProp, 'yyyy/MM/dd') as string
     const IDProp = 20144 // Get the ID of the book from the database
     const genreArray = genresProp.split(',').map(genre => genre.trim())
     const authorsArray = authorsProp.split(',').map(authors => authors.trim())
-    this.items.push(
-      { name: bookNameProp, 
-        authors: authorsArray, 
-        description: bookDescriptionProp, 
-        id: IDProp, 
-        genres: genreArray, 
-        publishDate: currentDate,
-        image: this.image
-      }
-      )
+    this.service.add('Books',{ name: bookNameProp, 
+      authors: authorsArray, 
+      description: bookDescriptionProp, 
+      genres: genreArray, 
+      publishDate: currentDate,
+      image: this.image
+    })
     this.closeBookModal();
   }
 
