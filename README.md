@@ -13,7 +13,6 @@ Qaree-Web-App is an administrative web application for managing users, groups, a
 # Tech stack
 - Angular
 - TailwindCSS
-- MongoDB
 - Firebase
 
 # Getting Started
